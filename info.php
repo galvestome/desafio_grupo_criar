@@ -4,11 +4,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
   spl_autoload_register(function($className){
     include 'src/'.$className.'.php';
   });
-
-  print_r($_FILES['logCorrida']);
-
+  
   $up = new upload();
-
+  $file = $up->saveFile($_FILES['logCorrida']);
 } else{
     header("Location: index.php");
 }
