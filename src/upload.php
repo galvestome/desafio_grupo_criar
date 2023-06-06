@@ -1,11 +1,6 @@
 <?php 
 
 class Upload {
-  public function __construct() {
-    //$log = file("C:\\xampp\\htdocs\\desafio_grupo_criar\\dados_da_corrida.txt");
-    //print_r($log);
-    echo "ok" . "<br>";
-  }
 
   public function validFile($file): void {
     if ($file["error"] != 0) {

@@ -13,8 +13,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $file = $upload->saveFile($_FILES['logCorrida']);
   $data = $logReader->reading($file);
-  print_r($data);
-  
+  //print_r($data[0]);
+  $finalResult = $result->finalResult($data);
+
+  //echo '<pre>';
+  //print_r($finalResult);
+
 } else{
     header("Location: index.php");
 }
@@ -45,27 +49,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         </tr>
       </thead>
       <tbody class="table-group-divider">
-        <tr>
-          <th scope="row">1</th>
-          <td>038</td>
-          <td>F.MASSA</td>
-          <td>4</td>
-          <td>5:43.234</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>038</td>
-          <td>F.ALONSO</td>
-          <td>4</td>
-          <td>5:43.234</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>038</td>
-          <td>S.VETTEL</td>
-          <td>4</td>
-          <td>5:43.234</td>
-        </tr>
+        <?php
+          $pos = 1;
+          foreach ($finalResult as $piloto) {  
+            ?>
+            <tr>
+              <th scope="row"> <?= $pos++ ?></th>
+              <td><?= $piloto['codigo_piloto'] ?> </td>
+              <td><?= $piloto['nome_piloto'] ?></td>
+              <td><?= $piloto['numero_volta'] ?></td>
+              <td><?= $piloto['tempo_volta'] ?></td>
+            </tr>
+          <?php
+          }
+        ?>
       </tbody>
     </table>
   </div>
